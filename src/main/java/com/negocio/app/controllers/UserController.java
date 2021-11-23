@@ -37,21 +37,21 @@ public class UserController {
         return service.getAll();
     }
     
-    @PostMapping("/save")
+    @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public void save (@RequestBody User user){
         service.save(user);
     }
     
-    @PutMapping("/update")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void update(@RequestBody User user){
-         service.update(user);
+    @GetMapping("/{email}")
+    //@ResponseStatus(HttpStatus.ACCEPTED)
+    public boolean emailExist(@PathVariable("email") String email) {
+        return service.emailExist(email); 
+         
     }
     
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int userId){
-         service.delete(userId);
+     @GetMapping("/{email}/{password}")
+    public User emailPassword(@PathVariable("email") String email, @PathVariable("password") String password) {
+        return service.correctPassword(email, password);
     }
 }

@@ -13,5 +13,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author David Riaño
  */
 public interface UserCrudRepository extends CrudRepository<User, Integer>{
-    
+     User findAllByEmail(String email);
 }

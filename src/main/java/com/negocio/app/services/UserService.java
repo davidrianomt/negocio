@@ -70,4 +70,35 @@ public class UserService {
         }).orElse(false);
         return aBoolean;
     } 
+    
+    public Boolean emailExist(String email) {
+        User user = repository.getUser(email);
+        return user!=null;
+    }
+    
+    public User correctPassword(String email, String password) {      
+        User user = repository.getUser(email);
+        String name = "NO DEFINIDO";
+        User validacionFallida = new User();
+
+        if (user!=null) {        
+            if (user.getPassword().equals(password)) {
+                return user;
+            }
+            else {
+                validacionFallida.setName(name);
+                validacionFallida.setEmail(email);
+                validacionFallida.setPassword(password);
+                
+                return validacionFallida;
+            }
+        }
+        else {
+            validacionFallida.setName(name);
+            validacionFallida.setEmail(email);
+            validacionFallida.setPassword(password);
+            
+            return validacionFallida;
+        }        
+    }
 }

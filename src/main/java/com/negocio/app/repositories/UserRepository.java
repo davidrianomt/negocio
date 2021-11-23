@@ -48,5 +48,7 @@ public class UserRepository {
         userCrudrepository.delete(user);
     }
     
-    
+    public User getUser(String email){
+        return userCrudrepository.findAllByEmail(email);
+    }
 }
