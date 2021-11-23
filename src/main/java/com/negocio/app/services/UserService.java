@@ -29,10 +29,10 @@ public class UserService {
     
     //Registrar 
     public User save(User user){
-        if(user.getIdUser()==null){
+        if(user.getId()==null){
             return repository.save(user);
         }else{
-            Optional<User> resultado = repository.getUser(user.getIdUser());
+            Optional<User> resultado = repository.getUser(user.getId());
             if(resultado.isPresent()){
                 return user;
             }else{
@@ -43,8 +43,8 @@ public class UserService {
     
     //Actualizar
     public User update(User user){
-        if(user.getIdUser()!=null){
-            Optional<User> resultado = repository.getUser(user.getIdUser());
+        if(user.getId()!=null){
+            Optional<User> resultado = repository.getUser(user.getId());
             if(resultado.isPresent()){
                 if(user.getName()!=null){
                     resultado.get().setName(user.getName());
