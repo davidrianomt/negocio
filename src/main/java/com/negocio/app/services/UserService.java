@@ -14,91 +14,72 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+    
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
     
-    //Consultar Todos los registros.
-    public List<User> getAll(){
-        return repository.getAll();
+    public List<User> getAll() {
+        return userRepository.getAll();
     }
     
-    //Buscar registro
-    public Optional<User> getUser(int userId) {
-        return repository.getUser(userId);
+    public User getById(Integer id) {
+        return userRepository.getById(id).orElse(null);
     }
     
-    //Registrar 
-    public User save(User user){
-        if(user.getId()==null){
-            return repository.save(user);
-        }else{
-            Optional<User> resultado = repository.getUser(user.getId());
-            if(resultado.isPresent()){
-                return user;
-            }else{
-                return repository.save(user);
-            }
-        }
+    public boolean emailExist(String email) {        
+        return userRepository.getEmail(email).isPresent();
     }
     
-    //Actualizar
-    public User update(User user){
-        if(user.getId()!=null){
-            Optional<User> resultado = repository.getUser(user.getId());
-            if(resultado.isPresent()){
-                if(user.getName()!=null){
-                    resultado.get().setName(user.getName());
-                }
-                if(user.getPassword()!=null){
-                    resultado.get().setPassword(user.getPassword());
-                }
-                repository.save(resultado.get());
-                return resultado.get();
-            }else{
-                return user;
-            }
-        }else{
+    public User correctPassword(String email, String password) {
+        User user = userRepository.getEmailandPassword(email, password);
+        User validacionFallida = new User();
+        String name = "NO DEFINIDO";
+
+        if (user == null) {
+            // validacionFallida.setName(name);
+            // validacionFallida.setEmail(email);
+            // validacionFallida.setPassword(password);
+
+            return validacionFallida;
+        } else {
             return user;
         }
     }
-    
-    //Eliminar
-    public boolean delete(int id){
-        Boolean aBoolean = getUser(id).map(user -> {
-           repository.delete(user);
-           return true;
-        }).orElse(false);
-        return aBoolean;
-    } 
-    
-    public Boolean emailExist(String email) {
-        User user = repository.getUser(email);
-        return user!=null;
-    }
-    
-    public User correctPassword(String email, String password) {      
-        User user = repository.getUser(email);
-        String name = "NO DEFINIDO";
-        User validacionFallida = new User();
 
-        if (user!=null) {        
-            if (user.getPassword().equals(password)) {
-                return user;
-            }
-            else {
-                validacionFallida.setName(name);
-                validacionFallida.setEmail(email);
-                validacionFallida.setPassword(password);
-                
-                return validacionFallida;
-            }
-        }
-        else {
-            validacionFallida.setName(name);
-            validacionFallida.setEmail(email);
-            validacionFallida.setPassword(password);
-            
-            return validacionFallida;
-        }        
+    
+    public Optional<User> save(User user) {
+        
+        if (user.getId() == null) 
+            return Optional.of(user);
+        
+        Optional<User> existeUser = userRepository.getById(user.getId());
+        
+        if (existeUser.isPresent()) 
+            return Optional.of(user);
+        
+        userRepository.save(user);
+        return Optional.empty();
     }
+    
+    public User update(User user) {
+        
+          if (user.getId() == null)
+            return user;
+        
+        Optional<User> existeUser = userRepository.getById(user.getId());
+        
+        if (existeUser.isPresent() == false)
+            return user;
+
+        //existeUser.get().setNombre(user.getNombre());
+        //existeUser.get().setCorreo(user.getCorreo());
+        //existeUser.get().setEdad(user.getEdad());
+        userRepository.save(user);
+        return null;
+    }
+    
+    public void delete(Integer id) {
+        userRepository.delete(id);
+    }
+    
 }

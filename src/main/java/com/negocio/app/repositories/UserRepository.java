@@ -6,11 +6,11 @@
 package com.negocio.app.repositories;
 
 import com.negocio.app.entities.User;
+import com.negocio.app.repositories.crud.UserCrudRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.negocio.app.repositories.crud.UserCrudRepository;
 
 /**
  *
@@ -20,35 +20,30 @@ import com.negocio.app.repositories.crud.UserCrudRepository;
 public class UserRepository {
     
     @Autowired
-    private UserCrudRepository userCrudrepository;
+    private UserCrudRepository userCRUD ;
     
-    /**
-     * Consultar
-    */
-    public List<User> getAll(){
-        return (List<User>) userCrudrepository.findAll();
+    public List<User> getAll() {
+        return (List<User>) userCRUD.findAll();
     }
     
-    //Buscar registro por Id
-    public Optional<User> getUser(int id){
-        return userCrudrepository.findById(id);
+    public Optional<User> getById(Integer id) {
+        return userCRUD.findById(id);
     }
     
-    /**
-     * Registrar
-     */
-    public User save(User user){
-        return userCrudrepository.save(user);
+    public Optional<User> getEmail(String email) {
+        return userCRUD.findByEmail(email);
     }
     
-    /**
-     * Eliminar
-     */
-    public void delete(User user){
-        userCrudrepository.delete(user);
+    public User save(User user) {
+        return userCRUD.save(user);
     }
     
-    public User getUser(String email){
-        return userCrudrepository.findAllByEmail(email);
+    public void delete(Integer id) {
+        userCRUD.deleteById(id);
     }
+
+    public User getEmailandPassword(String email, String password) {
+        return userCRUD.findByEmailAndPassword(email, password);
+    }
+    
 }

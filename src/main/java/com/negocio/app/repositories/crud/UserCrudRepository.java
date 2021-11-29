@@ -6,6 +6,8 @@
 package com.negocio.app.repositories.crud;
 
 import com.negocio.app.entities.User;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +15,8 @@ import org.springframework.data.repository.CrudRepository;
  * @author David Riaño
  */
 public interface UserCrudRepository extends CrudRepository<User, Integer>{
-     User findAllByEmail(String email);
+    @Query
+    public Optional<User> findByEmail(String email);   
+
+    public User findByEmailAndPassword(String email, String password);
 }

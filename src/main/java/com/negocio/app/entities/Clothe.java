@@ -15,24 +15,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author David Riaño
  */
-@Document(collection = "usuarios")
+@Document(collection = "clothes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+
+public class Clothe {
 
     @Id
-    private Integer id;
-    private String identification;
-    private String name;
-    private String address;
-    private String cellPhone;
-    private String email;
-    private String password;
-    private String zone;
-    private String type;
-    
-    //private Date birthtDay;
-    //private String monthBirthtDay;
+    private String reference;
+    private String category;
+    private String size;
+    private String description;
+    private boolean availability = true;
+    private double price;
+    private Integer quantity;
+    private String photography;
 
 }
