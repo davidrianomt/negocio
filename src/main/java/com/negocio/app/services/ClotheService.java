@@ -55,10 +55,17 @@ public class ClotheService {
         if (existeClothe.isPresent() == false)
             return clothe;
 
-        //existeClothe.get().setNombre(clothe.getNombre());
-        //existeClothe.get().setCorreo(clothe.getCorreo());
-        //existeClothe.get().setEdad(clothe.getEdad());
-        clotheRepository.save(clothe);
+        existeClothe.get().setReference(clothe.getReference());
+        existeClothe.get().setCategory(clothe.getCategory());
+        if(clothe.getSize()!=null){
+            existeClothe.get().setSize(clothe.getSize());
+        }
+        existeClothe.get().setDescription(clothe.getDescription());
+        existeClothe.get().setPrice(clothe.getPrice());
+        existeClothe.get().setAvailability(true);
+        existeClothe.get().setQuantity(clothe.getQuantity());
+        existeClothe.get().setPhotography(clothe.getPhotography());
+        clotheRepository.save(existeClothe.get());
         return null;
     }
     
