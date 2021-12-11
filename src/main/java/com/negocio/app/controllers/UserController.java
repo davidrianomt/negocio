@@ -39,36 +39,32 @@ public class UserController {
         return userService.getAll();
     }
 
-    //@GetMapping("/{id}")
-    //public User getById(@PathVariable Integer id) {
-    //    return userService.getById(id);
-    //}
-    
-    
-    
+    @GetMapping("/{id}")
+    public User getById(@PathVariable("id") Integer id) {
+        return userService.getById(id);
+    }
+
     @PostMapping("/new")
     public ResponseEntity<User> save(@RequestBody User user) {
         Optional<User> p = userService.save(user);
         return new ResponseEntity(p, HttpStatus.CREATED);
     }
-    
+
     @GetMapping("/emailexist/{email}")
-    public boolean emailExist (@PathVariable String email) {
+    public boolean emailExist(@PathVariable String email) {
         return userService.emailExist(email);
     }
-    
+
     @GetMapping("/{email}/{password}")
     public User emailPassword(@PathVariable("email") String email, @PathVariable("password") String password) {
         return userService.correctPassword(email, password);
     }
-    
 
     @PutMapping("/update")
     public ResponseEntity<User> update(@RequestBody User user) {
         User p = userService.update(user);
         return new ResponseEntity(p, HttpStatus.CREATED);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id) {
