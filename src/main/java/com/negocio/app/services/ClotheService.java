@@ -18,59 +18,76 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ClotheService {
-    
+
     @Autowired
     private ClotheRepository clotheRepository;
-    
+
     public List<Clothe> getAll() {
         return clotheRepository.getAll();
     }
-    
+
     public Clothe getByReference(String reference) {
         return clotheRepository.getByReference(reference).orElse(null);
     }
-    
+
     public Clothe save(Clothe clothe) {
-        
-        if (clothe.getReference() == null) 
+
+        if (clothe.getReference() == null) {
             return clothe;
-        
+        }
+
         Optional<Clothe> existeClothe = clotheRepository.getByReference(clothe.getReference());
-        
-        if (existeClothe.isPresent()) 
+
+        if (existeClothe.isPresent()) {
             return clothe;
-        
+        }
+
         clotheRepository.save(clothe);
         return null;
     }
 
-    
     public Clothe update(Clothe clothe) {
-        
-          if (clothe.getReference() == null)
-            return clothe;
-        
-        Optional<Clothe> existeClothe = clotheRepository.getByReference(clothe.getReference());
-        
-        if (existeClothe.isPresent() == false)
-            return clothe;
 
-        existeClothe.get().setReference(clothe.getReference());
-        existeClothe.get().setCategory(clothe.getCategory());
-        if(clothe.getSize()!=null){
-            existeClothe.get().setSize(clothe.getSize());
+        if (clothe.getReference() == null) {
+            return clothe;
         }
-        existeClothe.get().setDescription(clothe.getDescription());
-        existeClothe.get().setPrice(clothe.getPrice());
-        existeClothe.get().setAvailability(true);
-        existeClothe.get().setQuantity(clothe.getQuantity());
-        existeClothe.get().setPhotography(clothe.getPhotography());
-        clotheRepository.save(existeClothe.get());
+
+        Optional<Clothe> existeClothe = clotheRepository.getByReference(clothe.getReference());
+
+        if (existeClothe.isPresent() == false) {
+            return clothe;
+        }
+
+        if (clothe.getReference() != null) {
+        } else {
+            clothe.setReference(existeClothe.get().getReference());
+        }
+        if (clothe.getCategory() == null) {
+            clothe.setCategory(existeClothe.get().getCategory());
+        }
+        if (clothe.getSize() != null) {
+        } else {
+            clothe.setSize(existeClothe.get().getSize());
+        }
+        if (clothe.getDescription() == null) {
+            clothe.setDescription(existeClothe.get().getDescription());
+        }
+        if (clothe.getPrice() <= 0) {
+            clothe.setPrice(existeClothe.get().getPrice());
+        }
+        if (clothe.getQuantity() == null) {
+            clothe.setQuantity(existeClothe.get().getQuantity());
+        }
+        if (clothe.getPhotography() == null) {
+            clothe.setPhotography(existeClothe.get().getPhotography());
+        }
+
+        clotheRepository.save(clothe);
         return null;
     }
-    
+
     public void delete(String reference) {
         clotheRepository.delete(reference);
     }
-    
+
 }
