@@ -25,7 +25,7 @@ public class ClotheService {
     public List<Clothe> getAll() {
         return clotheRepository.getAll();
     }
-
+       
     public Clothe getByReference(String reference) {
         return clotheRepository.getByReference(reference).orElse(null);
     }

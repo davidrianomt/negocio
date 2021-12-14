@@ -3,6 +3,7 @@ package com.negocio.app.controllers;
 import com.negocio.app.entities.Clothe;
 import com.negocio.app.services.ClotheService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +40,10 @@ public class ClotheController {
         return clotheService.getAll();
     }
 
-    //@GetMapping("/{reference}")
-    //public Clothe getByReference(@PathVariable String reference) {
-    //    return clotheService.getByReference(id);
-    //}
+    @GetMapping("/{reference}")
+    public Clothe getByReference(@PathVariable("reference") String reference){
+        return clotheService.getByReference(reference);
+    }
     
     @PostMapping("/new")
     public ResponseEntity<Clothe> save(@RequestBody Clothe clothe) {
