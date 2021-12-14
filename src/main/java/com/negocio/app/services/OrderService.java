@@ -74,7 +74,20 @@ public class OrderService {
         
         if (existeOrder.isPresent() == false)
             return order;
-
+        
+        if (order.getId()!= null) {
+        } else {
+            order.setId(existeOrder.get().getId());
+        }
+        if (order.getRegisterDay()!= null) {
+        } else {
+            order.setRegisterDay(existeOrder.get().getRegisterDay());
+        }
+        if (order.getStatus()!= null) {
+        } else {
+            order.setStatus(existeOrder.get().getStatus());
+        }
+        
         orderRepository.save(order);
         return null;
     }
