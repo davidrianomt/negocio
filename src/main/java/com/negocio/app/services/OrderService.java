@@ -65,7 +65,7 @@ public class OrderService {
         return Optional.empty();
     }
     
-    public Order update(Order order) {
+    public Order updates(Order order) {
         
           if (order.getId() == null)
             return order;
@@ -74,24 +74,26 @@ public class OrderService {
         
         if (existeOrder.isPresent() == false)
             return order;
-        
-        if (order.getId()!= null) {
-        } else {
-            order.setId(existeOrder.get().getId());
-        }
-        if (order.getRegisterDay()!= null) {
-        } else {
-            order.setRegisterDay(existeOrder.get().getRegisterDay());
-        }
-        if (order.getStatus()!= null) {
-        } else {
-            order.setStatus(existeOrder.get().getStatus());
-        }
-        
+
         orderRepository.save(order);
         return null;
     }
-    
+    public Order update(Order order){
+        if(order.getId()!=null){
+            Optional<Order> resultado = orderRepository.getById(order.getId());
+            if(resultado.isPresent()){
+                if(order.getStatus()!=null){
+                    resultado.get().setStatus(order.getStatus());
+                }
+                orderRepository.save(resultado.get());
+                return resultado.get();
+            }else{
+                return order;
+            }
+        }else{
+            return order;
+        }
+    }
     public void delete(Integer id) {
         orderRepository.delete(id);
     }
