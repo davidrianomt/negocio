@@ -32,7 +32,7 @@ public class ClotheRepository {
         return clotheCRUD.findByPriceLessThanEqual(price);
     }
     public Optional<Clothe> getByClotheContaining(String word) {
-        return clotheCRUD.findByDescriptionContaining(word);
+        return clotheCRUD.findByDescriptionContainingIgnoreCase(word);
     }
     public Clothe save(Clothe clothe) {
         return clotheCRUD.save(clothe);

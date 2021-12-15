@@ -60,7 +60,6 @@ public class ClotheController {
         return new ResponseEntity(p, HttpStatus.CREATED);
     }
     
-
     @PutMapping("/update")
     public ResponseEntity<Clothe> update(@RequestBody Clothe clothe) {
         Clothe p = clotheService.update(clothe);
