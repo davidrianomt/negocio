@@ -29,7 +29,9 @@ public class UserRepository {
     public Optional<User> getById(Integer id) {
         return userCRUD.findById(id);
     }
-    
+    public Optional<User> getByMonthBirthDay(Integer id) {
+        return userCRUD.findByMonthBirthDay(id);
+    }
     public Optional<User> getEmail(String email) {
         return userCRUD.findByEmail(email);
     }

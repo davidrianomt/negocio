@@ -43,7 +43,10 @@ public class UserController {
     public User getById(@PathVariable("id") Integer id) {
         return userService.getById(id);
     }
-
+    @GetMapping("/birthday/{id}")
+    public User getByMonthBirthtDay(@PathVariable("id") Integer id) {
+        return userService.getByMonthBirthtDay(id);
+    }
     @PostMapping("/new")
     public ResponseEntity<User> save(@RequestBody User user) {
         Optional<User> p = userService.save(user);

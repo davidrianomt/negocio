@@ -14,7 +14,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author David Riaño
  */
 public interface ClotheCrudRepository  extends MongoRepository<Clothe, Integer>{
-     public Optional<Clothe> findByReference(String reference);
-
+    public Optional<Clothe> findByReference(String reference);
+    public Optional<Clothe> findByPriceLessThanEqual(Integer price);
+    public Optional<Clothe> findByDescriptionContaining(String word);
     public void deleteByReference(String reference);
 }

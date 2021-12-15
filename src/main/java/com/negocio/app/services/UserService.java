@@ -81,5 +81,9 @@ public class UserService {
     public void delete(Integer id) {
         userRepository.delete(id);
     }
+
+    public User getByMonthBirthtDay(Integer id) {
+        return userRepository.getByMonthBirthDay(id).orElse(null);
+    }
     
 }
