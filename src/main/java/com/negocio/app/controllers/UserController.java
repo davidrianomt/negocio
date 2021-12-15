@@ -44,7 +44,7 @@ public class UserController {
         return userService.getById(id);
     }
     @GetMapping("/birthday/{id}")
-    public User getByMonthBirthtDay(@PathVariable("id") Integer id) {
+    public User getByMonthBirthtDay(@PathVariable("id") String id) {
         return userService.getByMonthBirthtDay(id);
     }
     @PostMapping("/new")

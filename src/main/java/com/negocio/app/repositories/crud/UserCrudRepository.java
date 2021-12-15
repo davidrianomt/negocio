@@ -20,5 +20,5 @@ public interface UserCrudRepository extends CrudRepository<User, Integer>{
 
     public User findByEmailAndPassword(String email, String password);
 
-    public Optional<User> findByMonthBirthDay(Integer id);
+    public Optional<User> findByMonthBirthDay(String id);
 }
