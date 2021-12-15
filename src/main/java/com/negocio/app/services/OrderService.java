@@ -7,7 +7,6 @@ package com.negocio.app.services;
 
 import com.negocio.app.entities.Order;
 import com.negocio.app.repositories.OrderRepository;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -37,9 +36,14 @@ public class OrderService {
         return orderRepository.getAllBySalesman(id);
     }
     
-    public List<Order> getAllByRegisterDayAndSalesmanId(String registerDay, Integer id) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = sdf.parse(registerDay);
+    public List<Order> getAllByRegisterDayAndSalesmanId(String registerDay, Integer id) {
+        SimpleDateFormat parser = new  SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        try {
+            date = parser.parse(registerDay);
+            
+        } catch (Exception e) {
+        }
         return orderRepository.getAllByRegisterDayAndSalesmanId(date, id);
     }
     

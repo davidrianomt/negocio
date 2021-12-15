@@ -50,8 +50,8 @@ public class OrderController {
         return orderService.getAllBySalesman(id);
     }
     
-    @GetMapping("/date/{date}/{id}")
-    public List<Order> getAllByRegisterDayAndSalesmanId(@PathVariable String registerDay, @PathVariable Integer id) throws ParseException {
+    @GetMapping("/date/{registerDay}/{id}")
+    public List<Order> getAllByRegisterDayAndSalesmanId(@PathVariable("registerDay") String registerDay,@PathVariable("id") Integer id){
         return orderService.getAllByRegisterDayAndSalesmanId(registerDay, id);
     }
     
