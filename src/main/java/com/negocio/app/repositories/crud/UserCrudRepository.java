@@ -6,6 +6,7 @@
 package com.negocio.app.repositories.crud;
 
 import com.negocio.app.entities.User;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -20,5 +21,5 @@ public interface UserCrudRepository extends CrudRepository<User, Integer>{
 
     public User findByEmailAndPassword(String email, String password);
 
-    public Optional<User> findByMonthBirthtDay(String id);
+    public List<User> findByMonthBirthtDay(String id);
 }

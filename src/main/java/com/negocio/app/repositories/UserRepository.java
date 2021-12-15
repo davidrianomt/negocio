@@ -29,7 +29,7 @@ public class UserRepository {
     public Optional<User> getById(Integer id) {
         return userCRUD.findById(id);
     }
-    public Optional<User> getByMonthBirthDay(String id) {
+    public List<User> getByMonthBirthDay(String id) {
         return userCRUD.findByMonthBirthtDay(id);
     }
     public Optional<User> getEmail(String email) {
