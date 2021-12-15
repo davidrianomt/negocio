@@ -26,14 +26,14 @@ public class ClotheService {
         return clotheRepository.getAll();
     }
        
-    public Clothe getByReference(String reference) {
-        return clotheRepository.getByReference(reference).orElse(null);
+    public Optional<Clothe> getByReference(String reference) {
+        return clotheRepository.getByReference(reference);
     }
-    public Clothe getByPrice(Integer price) {
-        return clotheRepository.getByPrice(price).orElse(null);
+    public List<Clothe> getByPrice(Integer price) {
+        return clotheRepository.getByPrice(price);
     }
-    public Clothe getByClotheContaining(String word) {
-        return clotheRepository.getByClotheContaining(word).orElse(null);
+    public List<Clothe> getByClotheContaining(String word) {
+        return clotheRepository.getByClotheContaining(word);
     }
     
     public Clothe save(Clothe clothe) {

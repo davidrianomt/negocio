@@ -28,10 +28,10 @@ public class ClotheRepository {
     public Optional<Clothe> getByReference(String reference) {
         return clotheCRUD.findByReference(reference);
     }
-    public Optional<Clothe> getByPrice(Integer price) {
+    public List<Clothe> getByPrice(Integer price) {
         return clotheCRUD.findByPriceLessThanEqual(price);
     }
-    public Optional<Clothe> getByClotheContaining(String word) {
+    public List<Clothe> getByClotheContaining(String word) {
         return clotheCRUD.findByDescriptionContainingIgnoreCase(word);
     }
     public Clothe save(Clothe clothe) {

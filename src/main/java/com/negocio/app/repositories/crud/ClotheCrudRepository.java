@@ -6,6 +6,7 @@
 package com.negocio.app.repositories.crud;
 
 import com.negocio.app.entities.Clothe;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -15,7 +16,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface ClotheCrudRepository  extends MongoRepository<Clothe, Integer>{
     public Optional<Clothe> findByReference(String reference);
-    public Optional<Clothe> findByPriceLessThanEqual(Integer price);
-    public Optional<Clothe> findByDescriptionContainingIgnoreCase(String word);
+    public List<Clothe> findByPriceLessThanEqual(Integer price);
+    public List<Clothe> findByDescriptionContainingIgnoreCase(String word);
     public void deleteByReference(String reference);
 }
